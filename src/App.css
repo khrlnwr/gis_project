@@ -1,8 +1,10 @@
 * {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: sans-serif;
+  /* padding-top: 10px; */
+  /* box-sizing: border-box; */
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
 }
 
 .leaflet-container {
@@ -11,7 +13,20 @@
 }
 
 .custom-topbar-div {
-  height: 50px;
+  height: 44px;
   background-color: wheat;
-  padding-top: 10dp;
+  padding-top: 5px;
+}
+
+.custom-font-header-p1 {
+  font-size: small;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 800;
+}
+
+
+.custom-font-header-p2 {
+  font-size: small;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 500;
 }
