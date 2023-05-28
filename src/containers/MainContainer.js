@@ -8,6 +8,8 @@ const position = [-7.536064, 112.238402]
 
 function MainContainer() {
 
+    //
+
     // const markers = [
     //   {
     //     geocode: [51.505, -0.09],
@@ -172,6 +174,8 @@ function MainContainer() {
       }
     };
 
+    var tileLayerUrl = 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer';
+
     /*
     const earthquakeData = {
       "type": "Feature",
@@ -208,9 +212,10 @@ function MainContainer() {
           <GeoJSON data={tsunamiData} style={{color: 'blue'}} /> */}
 
           <LayersControl position="topright">
-            <BaseLayer checked name="Base Map">
-              <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="Map data © OpenStreetMap contributors" />
-            </BaseLayer>
+            
+          <TileLayer
+            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}"
+            attribution="Tiles &copy; Esri"/>
 
             <Overlay name="Earthquake Layer" checked>
               <GeoJSON data={listEarthquakePrones} style={{color: 'red'}} pointToLayer={pointToLayer} onEachFeature={onEachFeature}></GeoJSON>
