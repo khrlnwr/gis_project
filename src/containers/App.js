@@ -2,7 +2,11 @@ import logo from '../logo.svg';
 import logo_tni from '../bais.png';
 import '../App.css';
 import MainContainer from './MainContainer';
+import WebMapServices from './WebMapServices';
 import Navbar from '../components/Navbar';
+import FeatureLayerComponent from './MapComponent';
+import MapComponent from './MapComponent';
+import ArcGISLayer from './ArcGISLayer';
 
 function App() {
   return (
@@ -12,7 +16,10 @@ function App() {
         <p className="custom-font-header-p1">Badan Intelijen Strategis TNI</p>
         <p className="custom-font-header-p2">Satuan Intelijen Teknik</p>
       </div>
-      <MainContainer />
+      {/* <ArcGISLayer/> */}
+      <WebMapServices />
+      {/* <MapComponent/> */}
+      {/* <FeatureLayerComponent /> */}
       {/* <Navbar/> */}
     </div>
   );

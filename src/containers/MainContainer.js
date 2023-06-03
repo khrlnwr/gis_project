@@ -1,30 +1,12 @@
-import { Icon } from "leaflet";
+import { Icon, point } from "leaflet";
 import React from "react";
-import { MapContainer, TileLayer, Marker, Popup, GeoJSON, LayersControl } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, GeoJSON, LayersControl, FeatureGroup } from 'react-leaflet';
 import L from 'leaflet';
 
 const {BaseLayer, Overlay} = LayersControl
 const position = [-7.536064, 112.238402]
 
 function MainContainer() {
-
-    //
-
-    // const markers = [
-    //   {
-    //     geocode: [51.505, -0.09],
-    //     popup: "Ini titik lokasi A"
-    //   },
-    //   {
-    //     geocode: [51.505, -0.092],
-    //     popup: "Ini titik lokasi B"
-    //   }
-    // ];
-
-    // const customIcon = new Icon({
-    //   iconUrl: require("../images/ic_location.png"),
-    //   iconSize: [35, 35]
-    // });
 
 
     const listTsunamiPrones = {
@@ -175,22 +157,6 @@ function MainContainer() {
     };
 
     var tileLayerUrl = 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer';
-
-    /*
-    const earthquakeData = {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [112.015662, -7.864498]
-      },
-      "properties": {
-        "name": "Pusat Gempa",
-        "radius": 1000
-
-      } 
-    }
-    */
-  
     const tsunamiData = {
       "type": "Feature",
       "geometry": {
@@ -202,31 +168,78 @@ function MainContainer() {
       } 
     }
 
-    return(
-        <MapContainer center={position} zoom={9} scrollWheelZoom={true}>
-          {/* <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <GeoJSON data={earthquakeData} style={{color: 'red'}} />
-          <GeoJSON data={tsunamiData} style={{color: 'blue'}} /> */}
+    const layers = [
+      {
+        key: 'layer1',
+        name: 'Layer 1',
+        url: 'https://gis.bnpb.go.id/server/rest/services/Titik_Epicenter_Majene/FeatureServer/0',
+        options: {
+          attribution: 'Layer 1 Attribution',
+          maxZoom: 18,
+        },
+      },
+    ];
 
-          <LayersControl position="topright">
+    // return(
+    //     <MapContainer center={position} zoom={9} scrollWheelZoom={true}>
+    //       {/* <TileLayer
+    //         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    //         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    //       />
+    //       <GeoJSON data={earthquakeData} style={{color: 'red'}} />
+    //       <GeoJSON data={tsunamiData} style={{color: 'blue'}} /> */}
+
+    //       <LayersControl position="topright">
             
-          <TileLayer
-            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}"
-            attribution="Tiles &copy; Esri"/>
+    //       <TileLayer
+    //         url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}"
+    //         attribution="Tiles &copy; Esri"/>
 
-            <Overlay name="Earthquake Layer" checked>
-              <GeoJSON data={listEarthquakePrones} style={{color: 'red'}} pointToLayer={pointToLayer} onEachFeature={onEachFeature}></GeoJSON>
-            </Overlay>
+    //         <Overlay url="https://gis.bnpb.go.id/server/rest/services/20200320_Jumlah_Status_COVID19/MapServer" pointToLayer={pointToLayer}></Overlay>
+    //         {/* <Overlay name="Earthquake Layer" checked>
+    //           <GeoJSON data={listEarthquakePrones} style={{color: 'red'}} pointToLayer={pointToLayer} onEachFeature={onEachFeature}></GeoJSON>
+    //         </Overlay>
 
-            <Overlay name="Tsunami Layer" checked>
-              <GeoJSON data={listTsunamiPrones} style={{color: 'blue'}} onEachFeature={onEachFeature}></GeoJSON>
-            </Overlay>
+    //         <Overlay name="Tsunami Layer" checked>
+    //           <GeoJSON data={listTsunamiPrones} style={{color: 'blue'}} onEachFeature={onEachFeature}></GeoJSON>
+    //         </Overlay> */}
 
-          </LayersControl>
-        </MapContainer>
+    //       </LayersControl>
+    //     </MapContainer>
+
+    return (
+    <MapContainer
+      center={[-2.387667387698413, 116.65420943880953]} // Set the initial center coordinates
+      zoom={2} // Set the initial zoom level
+      style={{ height: '100vh', width: '100%' }} // Set the map container size
+    >
+      <TileLayer
+        url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}"
+      />
+
+      <FeatureGroup url="https://gis.bnpb.go.id/server/rest/services/OSM_Sulbar_unduh_15_Jan_Polygon/MapServer/0"
+        style={() => ({
+          color: 'blue',
+          weight: 2,
+          fillColor: 'yellow',
+          fillOpacity: 0.5
+        })}
+      />
+          
+      
+
+    {/* <FeatureGroup
+      url="https://gis.bnpb.go.id/server/rest/services/Titik_Epicenter_Majene/FeatureServer"
+      style={() => ({
+        color: 'blue',
+        weight: 2,
+        fillColor: 'yellow',
+        fillOpacity: 0.5,
+      })}
+    /> */}
+
+
+    </MapContainer>
     )
 }
 
